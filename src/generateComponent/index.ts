@@ -1,4 +1,5 @@
 const fs = require("fs");
+import * as templates from "../templates";
 
 export async function generateComponent(
   type: string,
@@ -7,39 +8,10 @@ export async function generateComponent(
 ) {
   const component =
     type === "Pure"
-      ? `
-  import React from 'react'
-  import './styles.scss'
+      ? templates.createPureFunc(componentName)
+      : templates.createClass(componentName);
 
-
-  const ${componentName} = ({}) => (
-    <div></div>
-  );
-
-  export default ${componentName};
-  `
-      : `
-  import React from 'react'
-  import './styles.scss'
-
-  class ${componentName} extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-
-      };
-    }
-
-    render() {
-      return (
-        <div>
-        </div>
-      );
-    }
-  }
-
-  export default ${componentName}
-  `;
+  const scss = templates.createSCSS(componentName);
 
   const newComponentDir = `${directory}/${componentName}`;
 
@@ -61,9 +33,14 @@ export async function generateComponent(
   );
 
   // Create SCSS styles file.
-  fs.writeFile(`${newComponentDir}/styles.scss`, "", "utf-8", (err: Error) => {
-    if (err) {
-      console.log("Error clearing and added header to file", err);
+  fs.writeFile(
+    `${newComponentDir}/styles.scss`,
+    scss,
+    "utf-8",
+    (err: Error) => {
+      if (err) {
+        console.log("Error clearing and added header to file", err);
+      }
     }
-  });
+  );
 }

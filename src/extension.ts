@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  let pureFunctionGenerator = vscode.commands.registerCommand(
+  disposable = vscode.commands.registerCommand(
     "extension.reactPureFunctionGenerator",
     async (uri: vscode.Uri) => {
       let name = await vscode.window.showInputBox({
@@ -42,7 +42,6 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(disposable);
-  context.subscriptions.push(pureFunctionGenerator);
 }
 
 // this method is called when your extension is deactivated
