@@ -1,3 +1,4 @@
+import * as vscode from "vscode";
 const fs = require("fs");
 import * as templates from "../templates";
 
@@ -6,19 +7,23 @@ export async function generateComponent(
   directory: string,
   componentName: string
 ) {
-  const component =
+  let component, styles;
+
+  component =
     type === "Pure"
       ? templates.createPureFunc(componentName)
       : templates.createClass(componentName);
 
-  const scss = templates.createSCSS(componentName);
+  styles = templates.createSCSS(componentName);
 
   const newComponentDir = `${directory}/${componentName}`;
 
   // If directory doesn't exist make it.
-  if (!fs.existsSync(newComponentDir)) {
-    await fs.mkdirSync(newComponentDir);
+  if (fs.existsSync(newComponentDir)) {
   }
+
+  // Create directory
+  await fs.mkdirSync(newComponentDir);
 
   // Create component index file.
   fs.writeFile(
@@ -27,7 +32,8 @@ export async function generateComponent(
     "utf-8",
     (err: Error) => {
       if (err) {
-        console.log("Error clearing and added header to file", err);
+        vscode.window.showInformationMessage("Error writing to file");
+        console.log("Error writing to file", err);
       }
     }
   );
@@ -35,11 +41,12 @@ export async function generateComponent(
   // Create SCSS styles file.
   fs.writeFile(
     `${newComponentDir}/styles.scss`,
-    scss,
+    styles,
     "utf-8",
     (err: Error) => {
       if (err) {
-        console.log("Error clearing and added header to file", err);
+        vscode.window.showInformationMessage("Error writing to file");
+        console.log("Error writing to file", err);
       }
     }
   );

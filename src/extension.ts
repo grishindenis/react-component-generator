@@ -34,6 +34,9 @@ export function activate(context: vscode.ExtensionContext) {
       });
 
       if (!name) {
+        vscode.window.showInformationMessage(
+          "Error: No component name entered"
+        );
         return;
       }
 
