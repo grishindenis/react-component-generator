@@ -44,3 +44,58 @@ export function createSCSS(componentName: string) {
         }
     `;
 }
+
+export function createRNPureFunc(componentName: string) {
+  return `
+  import React from 'react'
+  import { View } from 'react-native'
+  import styles from './styles'
+
+
+  const ${componentName} = ({}) => (
+    <View style={styles.container}> 
+
+    </View>
+  );
+  
+  export default ${componentName}
+  `;
+}
+
+export function createRNClass(componentName: string) {
+  return `
+  import React from 'react'
+  import { View } from 'react-native'
+  import styles from './styles'
+  
+    class ${componentName} extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+  
+        };
+      }
+  
+      render() {
+        return (
+          <View style={styles.container}>
+          </View> 
+        );
+      }
+    }
+  
+    export default ${componentName}
+    `;
+}
+
+export function createRNStyles(componentName: string) {
+  return `
+  import { StyleSheet } from 'react-native'
+
+  export default StyleSheet.create({
+    container: {
+
+    }
+  })
+    `;
+}

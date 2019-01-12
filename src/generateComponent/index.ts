@@ -9,12 +9,26 @@ export async function generateComponent(
 ) {
   let component, styles;
 
-  component =
-    type === "Pure"
-      ? templates.createPureFunc(componentName)
-      : templates.createClass(componentName);
+  const forReactNative = vscode.workspace
+    .getConfiguration("")
+    .get("reactNativeComponents");
 
-  styles = templates.createSCSS(componentName);
+  console.log("forRN", forReactNative);
+
+  if (forReactNative) {
+    component =
+      type === "Pure"
+        ? templates.createRNPureFunc(componentName)
+        : templates.createRNClass(componentName);
+    styles = templates.createRNStyles(componentName);
+  } else {
+    component =
+      type === "Pure"
+        ? templates.createPureFunc(componentName)
+        : templates.createClass(componentName);
+
+    styles = templates.createSCSS(componentName);
+  }
 
   const newComponentDir = `${directory}/${componentName}`;
 
@@ -38,9 +52,10 @@ export async function generateComponent(
     }
   );
 
-  // Create SCSS styles file.
+  // Create  styles file.
+  const ext = forReactNative ? "js" : "scss";
   fs.writeFile(
-    `${newComponentDir}/styles.scss`,
+    `${newComponentDir}/styles.${ext}`,
     styles,
     "utf-8",
     (err: Error) => {

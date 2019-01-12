@@ -14,6 +14,17 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Generate React component",
+      "properties": {
+        "reactNativeComponents": {
+          "type": "boolean",
+          "default": false,
+          "description": "If set to true, components generated will be for React Native."
+        }
+      }
+    },
     "commands": [
       {
         "command": "extension.reactComponentGenerator",
