@@ -1,7 +1,7 @@
 {
   "name": "react-component-generator",
   "displayName": "react-component-generator",
-  "description": "Dropdown menu option of creating new React component or Pure Function. ",
+  "description": "Dropdown menu option of creating new Class or Pure Function for React or React Native.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.30.0"
