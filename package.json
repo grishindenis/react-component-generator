@@ -1,6 +1,6 @@
 {
-  "name": "react-component-generator",
-  "displayName": "react-component-generator",
+  "name": "generate-react-component",
+  "displayName": "generate-react-component",
   "description": "Dropdown menu option of creating new Class or Pure Function for React or React Native.",
   "version": "0.0.1",
   "engines": {
@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.reactComponentGenerator"
+    "onCommand:extension.generateReactComponent"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -27,11 +27,11 @@
     },
     "commands": [
       {
-        "command": "extension.reactComponentGenerator",
+        "command": "extension.generateReactComponent",
         "title": "Create React class"
       },
       {
-        "command": "extension.reactPureFunctionGenerator",
+        "command": "extension.generateReactPureFunc",
         "title": "Create React Pure Function"
       }
     ],
@@ -39,12 +39,12 @@
       "explorer/context": [
         {
           "when": "explorerResourceIsFolder",
-          "command": "extension.reactComponentGenerator",
+          "command": "extension.generateReactComponent",
           "group": "z_commands"
         },
         {
           "when": "explorerResourceIsFolder",
-          "command": "extension.reactPureFunctionGenerator",
+          "command": "extension.generateReactPureFunc",
           "group": "z_commands"
         }
       ]
