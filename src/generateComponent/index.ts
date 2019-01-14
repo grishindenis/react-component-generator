@@ -13,8 +13,6 @@ export async function generateComponent(
     .getConfiguration("")
     .get("reactNativeComponents");
 
-  console.log("forRN", forReactNative);
-
   if (forReactNative) {
     component =
       type === "Pure"
@@ -53,7 +51,14 @@ export async function generateComponent(
   );
 
   // Create  styles file.
-  const ext = forReactNative ? "js" : "scss";
+  let ext;
+  if (forReactNative) {
+    ext = "js";
+  } else {
+    const scssEnabled = vscode.workspace.getConfiguration("").get("scss");
+    ext = scssEnabled ? "scss" : "css";
+  }
+
   fs.writeFile(
     `${newComponentDir}/styles.${ext}`,
     styles,

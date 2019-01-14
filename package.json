@@ -21,7 +21,12 @@
         "reactNativeComponents": {
           "type": "boolean",
           "default": false,
-          "description": "If set to true, components generated will be for React Native."
+          "description": "Generate components for for React Native."
+        },
+        "scss": {
+          "type": "boolean",
+          "default": false,
+          "description": "Styles file will be set to .scss (NOTE: Only works if React Native Component set to false)."
         }
       }
     },
