@@ -6,7 +6,7 @@ A extension for VSCode which adds menu items to create a React/React native clas
 
 The extension will ask you for a component name, then it will create a folder with pre-filled index and styles files.
 
-![Example](./assets/example.gif)
+![Example](https://gph.to/2RA7ehV)
 
 ## Extension Settings
 

@@ -2,6 +2,10 @@
   "name": "generate-react-component",
   "displayName": "generate-react-component",
   "description": "Dropdown menu option of creating new Class or Pure Function for React or React Native.",
+  "publisher": "mierz00",
+  "repository": {
+    "url": "https://github.com/mierz00/react-component-generator"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.30.0"
