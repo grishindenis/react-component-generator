@@ -1,3 +1,7 @@
+export function upperCaseFirstLetter(str: string) {
+    return str[0].toUpperCase() + str.slice(1);
+}
+
 export function createPureFunc(componentName: string) {
   return `
   import React from 'react'
@@ -7,42 +11,38 @@ export function createPureFunc(componentName: string) {
   const ${componentName} = ({}) => (
     <div></div>
   );
-  
+
   export default ${componentName}
   `;
 }
 
 export function createClass(componentName: string) {
-  return `
-    import React from 'react'
-    import './styles.scss'
-  
-    class ${componentName} extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-  
-        };
-      }
-  
-      render() {
+    return `import React, { Component } from 'react';
+
+import './${componentName}.css';
+
+export default class ${upperCaseFirstLetter(componentName)}
+    extends Component
+{
+    state = {
+
+    };
+
+    render() {
         return (
-          <div className="${componentName}-container">
-          </div>
+            <div className="${componentName}">
+            </div>
         );
-      }
     }
-  
-    export default ${componentName}
-    `;
+}
+`;
 }
 
 export function createSCSS(componentName: string) {
-  return `
-        .${componentName}-container {
+    return `.${componentName} {
 
-        }
-    `;
+}
+`;
 }
 
 export function createRNPureFunc(componentName: string) {
@@ -53,11 +53,11 @@ export function createRNPureFunc(componentName: string) {
 
 
   const ${componentName} = ({}) => (
-    <View style={styles.container}> 
+    <View style={styles.container}>
 
     </View>
   );
-  
+
   export default ${componentName}
   `;
 }
@@ -67,23 +67,23 @@ export function createRNClass(componentName: string) {
   import React from 'react'
   import { View } from 'react-native'
   import styles from './styles'
-  
+
     class ${componentName} extends React.Component {
       constructor(props) {
         super(props);
         this.state = {
-  
+
         };
       }
-  
+
       render() {
         return (
           <View style={styles.container}>
-          </View> 
+          </View>
         );
       }
     }
-  
+
     export default ${componentName}
     `;
 }
@@ -98,4 +98,11 @@ export function createRNStyles(componentName: string) {
     }
   })
     `;
+}
+
+export function createDefaultIndex(componentName: string) {
+    return `import ${upperCaseFirstLetter(componentName)} from './${componentName}.js';
+
+export default ${upperCaseFirstLetter(componentName)};
+`;
 }

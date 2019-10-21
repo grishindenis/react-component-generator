@@ -50,6 +50,15 @@ export async function generateComponent(
     }
   );
 
+  // Create index.js
+  const defaultIndexComponent = templates.createDefaultIndex(componentName);
+  fs.writeFile(`${newComponentDir}/index.js`, defaultIndexComponent, "utf-8", (err) => {
+      if (err) {
+          vscode.window.showInformationMessage("Error writing to file");
+          console.log("Error writing to file", err);
+      }
+  });
+
   // Create  styles file.
   let ext;
   if (forReactNative) {
@@ -60,7 +69,7 @@ export async function generateComponent(
   }
 
   fs.writeFile(
-    `${newComponentDir}/styles.${ext}`,
+    `${newComponentDir}/${componentName}.${ext}`,
     styles,
     "utf-8",
     (err: Error) => {
