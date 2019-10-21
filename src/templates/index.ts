@@ -1,5 +1,20 @@
 export function upperCaseFirstLetter(str: string) {
-    return str[0].toUpperCase() + str.slice(1);
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+export function formatCamelCase(str: string) {
+    for (let index = 0; index < str.length; index++) {
+        if (str[index] === "-") {
+            str = str.slice(0, index) + str.slice(index + 1);
+            --index;
+
+            const nextIndex = index + 1;
+            if (str[nextIndex] !== "-" && str[nextIndex] !== undefined) {
+                str = str.substr(0, nextIndex) + str[nextIndex].toUpperCase() + str.substr(nextIndex + 1);
+            }
+        }
+    }
+    return upperCaseFirstLetter(str);
 }
 
 export function createPureFunc(componentName: string) {
@@ -21,7 +36,7 @@ export function createClass(componentName: string) {
 
 import './${componentName}.css';
 
-export default class ${upperCaseFirstLetter(componentName)}
+export default class ${formatCamelCase(componentName)}
     extends Component
 {
     state = {
@@ -101,8 +116,8 @@ export function createRNStyles(componentName: string) {
 }
 
 export function createDefaultIndex(componentName: string) {
-    return `import ${upperCaseFirstLetter(componentName)} from './${componentName}.js';
+    return `import ${formatCamelCase(componentName)} from './${componentName}.js';
 
-export default ${upperCaseFirstLetter(componentName)};
+export default ${formatCamelCase(componentName)};
 `;
 }
